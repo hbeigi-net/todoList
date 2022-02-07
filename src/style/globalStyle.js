@@ -6,6 +6,10 @@ export const GlobalStyle = createGlobalStyle`
         margin : 0 ; 
         box-sizing : border-box ; 
     }
+    /* input
+    {
+        color : ${(props) => props.theme.palette.text} !important;  
+    } */
     body 
     {
         background-color : ${(props) => props.theme.palette.bg};
