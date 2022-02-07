@@ -2,6 +2,7 @@ import SideBar from "./components/SideBar";
 import { GlobalStyle } from "./style/globalStyle";
 import { useTheme } from "./contexts/ThemeContext";
 import ThemeToggle from "./components/themeToggler"
+import TaskDetail from "./components/taskDetail"
 function App() {
   const { theme } = useTheme();
   return (
@@ -9,9 +10,7 @@ function App() {
       <GlobalStyle theme={theme} />
       <ThemeToggle/>
       <SideBar />
-      <h1>
-        hello world 
-      </h1>
+      <TaskDetail/>
     </>
   );
 }

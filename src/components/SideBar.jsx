@@ -2,9 +2,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import {useTheme} from "../contexts/ThemeContext"
-
-
+import {BtnOne} from "./subComp/btn1"
+import TaskItem from "./taskItem"
+import Button from '@mui/material/Button'
 const Drawer = styled.div`
+    z-index : 100 ; 
     position : fixed ; 
     padding : 5px ; 
     text-align : center ; 
@@ -16,7 +18,7 @@ const Drawer = styled.div`
     background-color : ${props=> props.theme.palette.primary} ;
     box-shadow : 1px 0px 1px 0px ${props=> props.theme.palette.primary} ;
     display : flex ; 
-    justify-content : space-between ; 
+    justify-content : flex-start ; 
     align-items : center ; 
     flex-direction : column
 `
@@ -28,23 +30,38 @@ const CenteredDiv = styled.div`
     width : 90% ; 
     border-radius : 3px; 
     background-color : #c3e0e549;
+    margin-bottom : calc(3vh);
 `
 export default function SideBar() {
     const [open, setOpen] = useState(true);
     const {theme} = useTheme();
-  return <>
-        <button style={{position : "fixed" , right : "300px"}} onClick={()=>setOpen(open=>!open)}>
-            toggle
-        </button>
-        <Drawer open ={open} theme={theme}>
-            <h1>
-                Todo List 
-            </h1>
-           <CenteredDiv>
-           </CenteredDiv>
-           <button>
-                hello world
-           </button>
-        </Drawer>
-  </>;
-}
+  return(
+
+      <>
+          <Button variant="contained" color="warning" style={{position : "fixed" , right : "300px" , top :'0'}} onClick={()=>setOpen(open=>!open)}>
+          toggle
+          </Button>
+          <Drawer open ={open} theme={theme}>
+          <h1>
+          Todo List 
+          </h1>
+          <CenteredDiv>
+          <TaskItem ></TaskItem>
+          <TaskItem ></TaskItem>
+          <TaskItem ></TaskItem>
+          <TaskItem ></TaskItem>
+          <TaskItem ></TaskItem>
+          </CenteredDiv>
+          <div style={{display : "flex" ,justifyContent : "space-between" , width : "90%"}}>
+          <Button variant="contained" color="info">
+          add task
+          </Button>  
+          <Button variant="contained" color="success">
+          save changes
+          </Button>
+          </div>
+          </Drawer>
+          </>
+          ) 
+        }
+        

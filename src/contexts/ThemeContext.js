@@ -8,9 +8,9 @@ const Theme = {
         palette : 
         {
 
-            bg : "#E7F2F8",
+            bg : "#e3e3e3",
             text : "#0C2D48",
-            primary : "#D3BBDD",
+            primary : "#a6bcff",
             secondary : "#FFAEBC"
         }
     },
@@ -21,7 +21,7 @@ const Theme = {
         {
             text : "#E7F2F8",
             bg : "#0C2D48",
-            primary : "#D3BBDD",
+            primary : "#3655b3",
             secondary : "#FFAEBC"
         }
     }
