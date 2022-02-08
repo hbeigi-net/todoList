@@ -7,8 +7,6 @@ const CsutomSwitch = styled(Switch)(({ theme }) => ({
   width: 50,
   height: 27,
   padding: 7,
-  position : "fixed" ,
-  right : 0,
   '& .MuiSwitch-switchBase': {
     margin: 1,
     padding: 0,

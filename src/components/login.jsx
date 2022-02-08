@@ -1,13 +1,11 @@
 import React ,{useEffect} from 'react';
 import styled from "styled-components"
 import "../style/login.css"
-import { useTheme } from '../contexts/ThemeContext';
 const Container = styled.div`
     position : fixed ; 
     top : 50% ; 
     left : 50% ; 
     transform : translate(-50% , -50%);
-    box-shadow: ${(props)=>props.theme.mode ==="dark" ? "rgba(248, 211, 0, 0.349) 0px 1px 3px, rgba(230, 255, 1, 0.336) 0px 1px 2px;" :"rgba(0, 0, 0, 0.349) 0px 1px 3px, rgba(0, 0, 0, 0.336) 0px 1px 2px;"} ;
     border-radius : 5px ; 
     display : flex ; 
     flex-direction : column ; 
@@ -16,7 +14,6 @@ const Container = styled.div`
 
 `
 export default function Login() {
-    const {theme} = useTheme();
     useEffect(()=>
     {
         const signUpButton = document.getElementById('signUp');

@@ -5,13 +5,13 @@ import ThemeToggle from "./components/themeToggler"
 import TaskDetail from "./components/taskDetail"
 import AddTask from "./components/addTask"
 import Login from "./components/login"
+import Nav from "./components/nav"
 function App() {
   const { theme } = useTheme();
   return (
     <>
-      <GlobalStyle theme={theme} />
-      <ThemeToggle/>
-      <Login/>
+      <GlobalStyle theme={theme}/>
+      <Nav/>
     </>
   );
 }
