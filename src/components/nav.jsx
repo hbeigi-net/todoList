@@ -2,12 +2,16 @@ import React ,{useState , useEffect} from 'react';
 import styled from "styled-components"
 import ThemeToggler from "./themeToggler"
 import {useTheme} from "../contexts/ThemeContext"
+import Side from "./SideBar"
+import Button from '@mui/material/Button'
 import moment from "moment"
+import { Outlet } from 'react-router-dom';
 const Container =styled.nav`
     position : fixed ; 
     top : 0 ; 
     transition : all 500ms ease  ; 
-    width : 100vw ; 
+    width : ${props=> props.open? "75vw" : "100vw"}  ; 
+    right : 0 ; 
     padding : 10px 20px ; 
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     display : flex ; 
@@ -18,8 +22,8 @@ const Container =styled.nav`
 `
 export default function Nav() {
     const {theme} =useTheme();
+    const [open, setOpen] = useState(true);
     const [date, setDate] = useState(moment().format("dd : yyyy-MM-DD"));
-    const [time , setTime] = useState(moment().format("HH : mm : ss"));
     useEffect(() => {
         const timerLocation = document.getElementById("navTimer")
         const timer = setInterval(() => {
@@ -34,10 +38,13 @@ export default function Nav() {
     
   return(
       <>
-            <Container theme={theme}>
-              
+            <Side open={open}/>
+            <Container theme={theme} open ={open}>
+            <Button variant="contained" color="warning" onClick={()=>setOpen(open=>!open)}>
+              Tasks
+             </Button>
 
-                <div style={{display:"flex" , flexDirection : "column" , justifyContent:"center" , alignItems : "cent"}}>
+                <div style={{display:"flex" , flexDirection : "column" , justifyContent:"center" , alignItems : "center"}}>
                     <h4>
                     {
                     date 
@@ -51,6 +58,7 @@ export default function Nav() {
                 <ThemeToggler />
                 
             </Container>
+            <Outlet/>
       </>
   );
 }

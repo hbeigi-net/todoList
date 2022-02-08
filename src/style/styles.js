@@ -1,4 +1,9 @@
+import { createGlobalStyle } from "styled-components";
 
+
+export const Style = createGlobalStyle`
+
+    
 #authForm
 {
 	color: #000000 !important;
@@ -217,3 +222,5 @@ input {
 	height: 40px;
 	width: 40px;
 }
+
+`

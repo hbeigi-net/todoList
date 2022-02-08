@@ -1,6 +1,8 @@
 import React ,{useEffect} from 'react';
 import styled from "styled-components"
-import "../style/login.css"
+// import "../style/login.css"
+import ThemeToggle from "./themeToggler"
+import {Style} from "../style/styles"
 const Container = styled.div`
     position : fixed ; 
     top : 50% ; 
@@ -30,9 +32,10 @@ export default function Login() {
     })
   return (
       <>
-      <Container>
-
-    <div class="container" id="container">
+        <Style/>
+      <Container id='authForm'>
+        <ThemeToggle/>
+      <div class="container" id="container">
             <div class="form-container sign-up-container">
                 <form action="#">
                     <h1>Create Account</h1>

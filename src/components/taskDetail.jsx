@@ -30,7 +30,7 @@ const TaskHeader = styled.div`
 
 const TaskDescription = styled.div`
   background-color : ${props=>props.theme.palette.bg};
-  color : ${props=>props.theme.palette.text};
+  color : ${props=>props.theme.mode==="dark" ? "#ffffff" : "#000000"};
   margin : 10px ; 
   padding : 10px 20px ;
   border-radius : 5px; 

@@ -62,7 +62,7 @@ export default function Addtask() {
        <div>
        
        <CustomInput placeholder='Task Title'/>
-       <DatePicker />
+       <DatePicker sx={{margin : "0"}}/>
        </div>
             <TTarea placeholder='Task Description ' />
 

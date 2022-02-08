@@ -19,7 +19,7 @@ const Theme = {
         mode : "dark",
         palette : 
         {
-            text : "#E7F2F8",
+            text : "#fff",
             bg : "#0C2D48",
             primary : "#3655b3",
             secondary : "#FFAEBC"

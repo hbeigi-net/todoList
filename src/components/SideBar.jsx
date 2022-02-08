@@ -10,9 +10,9 @@ const Drawer = styled.div`
     text-align : center ; 
     top:0 ; 
     bottom : 0 ; 
-    width : 330px ;
-    transition : all 500ms ease-in-out;
-    left : ${props=> props.open ? "0" : "-330px"} ; 
+    width : 25vw ;
+    transition : all 500ms ease  ; 
+    left : ${props=> props.open ? "0" : "-25vw"} ; 
     background-color : ${props=> props.theme.palette.primary} ;
     box-shadow : 1px 0px 1px 0px ${props=> props.theme.palette.primary} ;
     display : flex ; 
@@ -30,15 +30,13 @@ const CenteredDiv = styled.div`
     background-color : #c3e0e549;
     margin-bottom : calc(3vh);
 `
-export default function SideBar() {
-    const [open, setOpen] = useState(true);
+export default function SideBar({open}) {
+
     const {theme} = useTheme();
   return(
 
       <>
-          <Button variant="contained" color="warning" style={{position : "fixed" , right : "300px" , top :'0'}} onClick={()=>setOpen(open=>!open)}>
-          toggle
-          </Button>
+
           <Drawer open ={open} theme={theme}>
           <h1>
           Todo List 
