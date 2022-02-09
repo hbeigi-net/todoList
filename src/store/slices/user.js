@@ -10,16 +10,16 @@ const init =
 }
 
 
-const uiSlice = createSlice({
+const userSlice = createSlice({
     name : "User_slice",
     initialState : init , 
     reducers : {
-        toggleSide : (state , action )=>
+        login : (state , action )=>
         {
-            state.sideOpen = !state.sideOpen 
-        }
+            state.user = action.payload.user ;  
+        },
     }
 })
 
-export const {toggleSide} = uiSlice.actions;
-export default uiSlice.reducer ; 
+export const {login} = userSlice.actions;
+export default userSlice.reducer ; 

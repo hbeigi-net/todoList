@@ -12,21 +12,33 @@ const entSlice = createSlice({
     reducers :{
         addTask : (state , action )=>
         {
-            state.tasks = action.payload.tasks ; 
+            state.tasks.unshift(action.payload.tasks) ; 
         },
         checkTask :(state , action)=>
         {
             const id = action.payload.id ; 
             state.tasks.map(item=>{
-                item.id == id ? item.isCompeleted = true : ''; 
+                if(item.id ===id )
+                {
+                    item.isCompeleted = true ; 
+                }
+                // item.id == id ? item.isCompeleted = true : ''; 
             })
         },
         unCkeckTask : (state, action)=>
         {
             const id = action.payload.id ; 
             state.tasks.map(item=>{
-                item.id == id ? item.isCompeleted = false : ''; 
+                if(item.id ===id )
+                {
+                    item.isCompeleted = false ; 
+                }
+                // item.id == id ? item.isCompeleted = false : ''; 
             })
         } 
        }
 })
+
+
+export const {checkTask , unCkeckTask , addTask} = entSlice.actions ; 
+export default entSlice.reducer ; 

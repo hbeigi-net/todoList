@@ -6,6 +6,9 @@ import Side from "./SideBar"
 import Button from '@mui/material/Button'
 import moment from "moment"
 import { Outlet } from 'react-router-dom';
+import { useDispatch , useSelector} from "react-redux"
+import {toggleSide} from "../store/slices/Ui"
+
 const Container =styled.nav`
     position : fixed ; 
     border-left : 2px solid  ${props=>props.theme.mode === "dark" ? 'rgba(255, 255, 255, 0.479)' :'rgba(0, 0, 0, 0.23)' } ; 
@@ -21,9 +24,13 @@ const Container =styled.nav`
     justify-content : space-between;
 
 `
+
+
 export default function Nav() {
+    const open = useSelector(state =>state.UI.sideOpen);
+    const dispatch = useDispatch();
     const {theme} =useTheme();
-    const [open, setOpen] = useState(true);
+    // const [open, setOpen] = useState(true);
     const [date, setDate] = useState(moment().format("dd : yyyy-MM-DD"));
     useEffect(() => {
         const timerLocation = document.getElementById("navTimer")
@@ -31,9 +38,13 @@ export default function Nav() {
             const newTime = moment().format("HH : mm : ss");
             timerLocation.innerHTML = newTime ; 
         }, 1000);
-    
+        
+        const dater = setInterval(() => {
+          setDate(moment().format("dd : yyyy-MM-DD"))
+        }, 600000);
       return () => {
         clearInterval(timer);
+        clearInterval(dater);
       };
     }, []);
     
@@ -41,7 +52,7 @@ export default function Nav() {
       <>
             <Side open={open}/>
             <Container theme={theme} open ={open}>
-            <Button variant="contained" color="warning" onClick={()=>setOpen(open=>!open)}>
+            <Button variant="contained" color="warning" onClick={()=>dispatch(toggleSide())}>
               Tasks
              </Button>
 
