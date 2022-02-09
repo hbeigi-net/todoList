@@ -8,6 +8,7 @@ import moment from "moment"
 import { Outlet } from 'react-router-dom';
 const Container =styled.nav`
     position : fixed ; 
+    border-left : 2px solid  ${props=>props.theme.mode === "dark" ? 'rgba(255, 255, 255, 0.479)' :'rgba(0, 0, 0, 0.23)' } ; 
     top : 0 ; 
     transition : all 500ms ease  ; 
     width : ${props=> props.open? "75vw" : "100vw"}  ; 
