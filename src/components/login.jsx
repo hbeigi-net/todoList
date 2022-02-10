@@ -1,8 +1,9 @@
-import React ,{useEffect} from 'react';
+import React ,{useEffect , useState} from 'react';
 import styled from "styled-components"
 // import "../style/login.css"
 import ThemeToggle from "./themeToggler"
 import {Style} from "../style/styles"
+import {useAuth} from "../contexts/AuthContext"
 const Container = styled.div`
     position : fixed ; 
     top : 50% ; 
@@ -16,6 +17,10 @@ const Container = styled.div`
 
 `
 export default function Login() {
+    const {setAuth} = useAuth();
+    const [name , setName] =useState('');
+    const [email , setEmail] =useState('');
+    const [pass , setPass] = useState('');
     useEffect(()=>
     {
         const signUpButton = document.getElementById('signUp');
@@ -30,6 +35,54 @@ export default function Login() {
             container.classList.remove("right-panel-active");
         });
     })
+
+    const signupHandler=(e)=>
+    {
+        const signup = async ()=>
+        {
+            try
+            {
+                const response = await fetch(`${process.env.BASE_URL}${process.env.SIGN_UP_URL}`,{
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        pass
+                    }),
+                    credentials: 'include',
+                })
+            }catch(error){
+                console.log(error.message);
+            }
+        
+
+        }   
+        signup();
+    }
+
+    const signinHandler=(e)=>
+    {
+        const signin = async ()=>
+        {
+            try
+            {
+                const response = await fetch(`${process.env.BASE_URL}${process.env.SIGN_IN_URL}`,{
+                    method : "POST",
+                    body : JSON.stringify({
+                        email , 
+                        pass
+                    })
+                })
+                const user = await response.json();
+                setAuth(user);
+            }catch(error)
+            {
+                console.log(error.message);
+            }
+         
+        }
+    }
   return (
       <>
         <Style/>
@@ -39,18 +92,17 @@ export default function Login() {
             <div class="form-container sign-up-container">
                 <form action="#">
                     <h1>Create Account</h1>
-                    <input type="text" placeholder="Name" />
-                    <input type="email" placeholder="Email" />
-                    <input type="password" placeholder="Password" />
-                    <button>Sign Up</button>
+                    <input value={name} onChange ={(e)=>setName(e.target.value)} type="text" placeholder="Name" />
+                    <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email" />
+                    <input type="password" value={pass} onChange={(e)=>setPass(e.target.value)} placeholder="Password" />
+                    <button onClick={(e)=>signupHandler(e)}>Sign Up</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
                 <form action="#">
                         <h1>Sign in</h1>
-
-                        <input type="email" placeholder="Email" />
-                        <input type="password" placeholder="Password" />
+                        <input type="email"  value={email} onChange={(e)=>setEmail(e.target.value)}  placeholder="Email" />
+                        <input type="password" placeholder="Password" value={pass} onChange={(e)=>setPass(e.target.value)} />
                         <button>Sign In</button>
                 </form>
             </div>
