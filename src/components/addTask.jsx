@@ -3,6 +3,8 @@ import styled from "styled-components"
 import {useTheme} from "../contexts/ThemeContext"
 import DatePicker from "./subComp/timePicker"
 import Button from '@mui/material/Button'
+import {useAuth} from "../contexts/AuthContext"
+// import moment from "moment"
 const Container = styled.div`
     
     display : flex ; 
@@ -56,19 +58,51 @@ const TTarea = styled.textarea`
 `
 export default function Addtask() {
     const {theme}=useTheme();
+    const {auth} = useAuth();
+    const [title , setTitle] = useState('');
+    const [time , setTime] = useState(null);
+    const [desc , setDesc] = useState('');
+    
+    const onAdd = ()=>
+    {
+        const addTask = async ()=>
+        {
+            try 
+            {
+
+
+                const response = await fetch(`${process.env.BASE_URL}${process.env.ADD_TASK}`,{
+                    method : "POST",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        title ,
+                        time ,
+                        desc , 
+                        auth 
+                    }),
+                });
+            }catch(error)
+            {
+                console.log(error.message);
+            }
+        }
+        addTask();
+        /* console.log(title  , time , desc);
+        console.log(time.getDay());
+        console.log(time.getDate());
+        console.log(moment(time).format("YYYY-MM-DD")) */
+    }
   return (
       <>
        <Container theme={theme}>
        <div>
-       
-       <CustomInput placeholder='Task Title'/>
-       <DatePicker sx={{margin : "0"}}/>
+       <CustomInput value ={title} onChange={(e)=>setTitle(e.target.value)} placeholder='Task Title'/>
+       <DatePicker value ={time} setValue={setTime} sx={{margin : "0"}}/>
        </div>
-            <TTarea placeholder='Task Description ' />
-
-            <Button variant="contained" color="success">
+        <TTarea placeholder='Task Description '  value={desc}  onChange={(e)=>setDesc(e.target.value)} />
+        <Button variant="contained" onClick={(e)=>onAdd()} color="success">
                 add task
-            </Button>
+        </Button>
         </Container>
     </>
   );
