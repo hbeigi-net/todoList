@@ -7,6 +7,7 @@ import TaskDetail from "./components/taskDetail"
 import AddTask from "./components/addTask"
 import Login from "./components/login"
 import Nav from "./components/nav"
+import AuthCheck from "./components/checkAuth"
 function App() {
   const { theme } = useTheme();
   return (
@@ -14,7 +15,7 @@ function App() {
       <GlobalStyle theme={theme}/>
  
       <Routes>
-          <Route path = "/" element ={<Nav/>}>
+          <Route path = "/" element ={<AuthCheck><Nav/></AuthCheck>}>
             <Route path=":taskid" element={<TaskDetail/>} />
             <Route path="addtask" element ={<AddTask/>}/>
           </Route>

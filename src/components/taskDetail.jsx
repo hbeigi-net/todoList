@@ -2,7 +2,8 @@ import { useTheme } from '../contexts/ThemeContext';
 import React from 'react';
 import styled from "styled-components"
 import Button from '@mui/material/Button'
-
+import {useAuth} from "../contexts/AuthContext"
+import { Navigate , useLocation} from "react-router-dom"
 
 const Container = styled.div`
   width : 80vw; 

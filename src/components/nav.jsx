@@ -8,7 +8,6 @@ import moment from "moment"
 import { Outlet } from 'react-router-dom';
 import { useDispatch , useSelector} from "react-redux"
 import {toggleSide} from "../store/slices/Ui"
-
 const Container =styled.nav`
     position : fixed ; 
     border-left : 2px solid  ${props=>props.theme.mode === "dark" ? 'rgba(255, 255, 255, 0.479)' :'rgba(0, 0, 0, 0.23)' } ; 
@@ -47,7 +46,6 @@ export default function Nav() {
         clearInterval(dater);
       };
     }, []);
-    
   return(
       <>
             <Side open={open}/>

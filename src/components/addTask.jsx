@@ -4,6 +4,7 @@ import {useTheme} from "../contexts/ThemeContext"
 import DatePicker from "./subComp/timePicker"
 import Button from '@mui/material/Button'
 import {useAuth} from "../contexts/AuthContext"
+import {useNavigate} from "react-router-dom"
 // import moment from "moment"
 const Container = styled.div`
     
@@ -57,6 +58,7 @@ const TTarea = styled.textarea`
         }
 `
 export default function Addtask() {
+    const navigate = useNavigate();
     const {theme}=useTheme();
     const {auth} = useAuth();
     const [title , setTitle] = useState('');
@@ -69,8 +71,6 @@ export default function Addtask() {
         {
             try 
             {
-
-
                 const response = await fetch(`${process.env.BASE_URL}${process.env.ADD_TASK}`,{
                     method : "POST",
                     headers: {'Content-Type': 'application/json'},
@@ -87,6 +87,7 @@ export default function Addtask() {
             }
         }
         addTask();
+        navigate("/")
         /* console.log(title  , time , desc);
         console.log(time.getDay());
         console.log(time.getDate());

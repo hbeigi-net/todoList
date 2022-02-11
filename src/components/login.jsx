@@ -4,6 +4,7 @@ import styled from "styled-components"
 import ThemeToggle from "./themeToggler"
 import {Style} from "../style/styles"
 import {useAuth} from "../contexts/AuthContext"
+import {useNavigate , useLocation } from "react-router-dom";
 const Container = styled.div`
     position : fixed ; 
     top : 50% ; 
@@ -21,23 +22,27 @@ export default function Login() {
     const [name , setName] =useState('');
     const [email , setEmail] =useState('');
     const [pass , setPass] = useState('');
+    const navigate = useNavigate();
+    const location = useLocation();
     useEffect(()=>
     {
         const signUpButton = document.getElementById('signUp');
         const signInButton = document.getElementById('signIn');
         const container = document.getElementById('container');
 
-        signUpButton.addEventListener('click', () => {
+        signUpButton.addEventListener('click', (e) => {
+            e.preventDefault();
             container.classList.add("right-panel-active");
         });
 
-        signInButton.addEventListener('click', () => {
+        signInButton.addEventListener('click', (e) => {
+            e.preventDefault();
             container.classList.remove("right-panel-active");
         });
     })
 
     const signupHandler=(e)=>
-    {
+    {   
         const signup = async ()=>
         {
             try
@@ -63,6 +68,8 @@ export default function Login() {
 
     const signinHandler=(e)=>
     {
+         const redirect = location.state?.path | '/';
+
         const signin = async ()=>
         {
             try
@@ -82,6 +89,9 @@ export default function Login() {
             }
          
         }
+        // signin();
+        setAuth("hamid");
+        navigate(redirect , {replace : true })
     }
   return (
       <>
@@ -95,7 +105,11 @@ export default function Login() {
                     <input value={name} onChange ={(e)=>setName(e.target.value)} type="text" placeholder="Name" />
                     <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email" />
                     <input type="password" value={pass} onChange={(e)=>setPass(e.target.value)} placeholder="Password" />
-                    <button onClick={(e)=>signupHandler(e)}>Sign Up</button>
+                    <button onClick={(e)=> {
+                        e.preventDefault();
+                        signupHandler(e)
+                        
+                        }}>Sign Up</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
@@ -103,7 +117,10 @@ export default function Login() {
                         <h1>Sign in</h1>
                         <input type="email"  value={email} onChange={(e)=>setEmail(e.target.value)}  placeholder="Email" />
                         <input type="password" placeholder="Password" value={pass} onChange={(e)=>setPass(e.target.value)} />
-                        <button>Sign In</button>
+                        <button type='button' onClick={(e)=>{
+                            e.preventDefault();
+                            signinHandler();
+                        }}>Sign In</button>
                 </form>
             </div>
             <div class="overlay-container">

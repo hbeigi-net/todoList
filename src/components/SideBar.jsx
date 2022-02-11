@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {useTheme} from "../contexts/ThemeContext"
 import TaskItem from "./taskItem"
 import Button from '@mui/material/Button'
-import { useDispatch , useSelector} from "react-redux"
+import {useNavigate} from "react-router-dom"
 const Drawer = styled.div`
     z-index : 100 ; 
     position : fixed ; 
@@ -32,8 +32,12 @@ const CenteredDiv = styled.div`
     margin-bottom : calc(3vh);
 `
 export default function SideBar({open}) {
-
+    const navigate = useNavigate();
     const {theme} = useTheme();
+    const toAddTask =()=>
+    {
+        navigate("addtask")
+    }
   return(
 
       <>
@@ -50,7 +54,7 @@ export default function SideBar({open}) {
           <TaskItem ></TaskItem>
           </CenteredDiv>
           <div style={{display : "flex" ,justifyContent : "space-between" , width : "90%"}}>
-          <Button variant="contained" color="info">
+          <Button variant="contained" onClick={(e)=>toAddTask()} color="info">
           add task
           </Button>  
           <Button variant="contained" color="success">
