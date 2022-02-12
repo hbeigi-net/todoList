@@ -68,7 +68,7 @@ export default function Login() {
 
     const signinHandler=(e)=>
     {
-         const redirect = location.state?.path | '/';
+         const redirect = location.state?.path || '/';
 
         const signin = async ()=>
         {

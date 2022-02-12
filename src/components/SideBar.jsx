@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import styled from 'styled-components';
 import {useTheme} from "../contexts/ThemeContext"
 import TaskItem from "./taskItem"
 import Button from '@mui/material/Button'
 import {useNavigate} from "react-router-dom"
+import { useSelector , useDispatch } from "react-redux";
+import { addTask } from "../store/slices/ent";
 const Drawer = styled.div`
     z-index : 100 ; 
     position : fixed ; 
@@ -34,10 +36,28 @@ const CenteredDiv = styled.div`
 export default function SideBar({open}) {
     const navigate = useNavigate();
     const {theme} = useTheme();
+    
     const toAddTask =()=>
     {
         navigate("addtask")
     }
+    const tasks = useSelector(state=> state.ENT.tasks); 
+    const dispatch= useDispatch();
+    useEffect(()=>
+    {
+        const getTasks = async ()=>
+        {
+            const response = await fetch(`${process.env.BASE_URL}${process.env.GET_TASK}`)
+            const data = await response.json();
+
+            /* dispatch(addTask(data)); */
+            
+            
+        }
+        /* getTasks() */
+        dispatch(addTask({name : "hamid"}));
+    },[])
+
   return(
 
       <>

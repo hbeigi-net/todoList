@@ -16,8 +16,8 @@ function App() {
  
       <Routes>
           <Route path = "/" element ={<AuthCheck><Nav/></AuthCheck>}>
-            <Route path=":taskid" element={<TaskDetail/>} />
-            <Route path="addtask" element ={<AddTask/>}/>
+            <Route path=":taskid" element={<AuthCheck><TaskDetail/></AuthCheck>} />
+            <Route path="addtask" element ={<AuthCheck><AddTask/></AuthCheck>}/>
           </Route>
           <Route path="auth" element={<Login/>} />
           
