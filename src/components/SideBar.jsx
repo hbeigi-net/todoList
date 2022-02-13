@@ -6,6 +6,7 @@ import Button from '@mui/material/Button'
 import {useNavigate} from "react-router-dom"
 import { useSelector , useDispatch } from "react-redux";
 import { addTask } from "../store/slices/ent";
+import {useAuth} from "../contexts/AuthContext"
 const Drawer = styled.div`
     z-index : 100 ; 
     position : fixed ; 
@@ -36,7 +37,7 @@ const CenteredDiv = styled.div`
 export default function SideBar({open}) {
     const navigate = useNavigate();
     const {theme} = useTheme();
-    
+    const {auth} = useAuth();
     const toAddTask =()=>
     {
         navigate("addtask")
@@ -57,6 +58,20 @@ export default function SideBar({open}) {
         /* getTasks() */
         dispatch(addTask({name : "hamid"}));
     },[])
+    const handleSave =()=>
+    {
+        const saveChanges = async ()=>
+        {
+            const response = await fetch(`${process.env.BASE_URL}${process.env.PUSH_URL}`,{
+                method:"POST",
+                headers : {"content type " : 'text'},
+                body : {
+                    tasks , 
+                    auth
+                }
+            })
+        }
+    }
 
   return(
 
@@ -77,7 +92,7 @@ export default function SideBar({open}) {
           <Button variant="contained" onClick={(e)=>toAddTask()} color="info">
           add task
           </Button>  
-          <Button variant="contained" color="success">
+          <Button variant="contained" color="success" onClick={(e)=> handleSave()}>
           save changes
           </Button>
           </div>
